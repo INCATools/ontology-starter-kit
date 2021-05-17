@@ -169,6 +169,15 @@ RUN wget -nv https://github.com/INCATools/dosdp-tools/releases/download/v$DOSDPV
 && chmod +x /tools/dosdp-tools \
 && chmod +x /tools/simple_pattern_tester.py
 
+###### relation-graph ######
+ENV RGVERSION=1.1
+ENV PATH "/tools/relation-graph/bin:$PATH"
+# LAYERSIZE ~200MB
+RUN wget -nv https://github.com/balhoff/relation-graph/releases/download/v$RGVERSION/relation-graph-$RGVERSION.tgz \
+&& tar -zxvf relation-graph-$RGVERSION.tgz \
+&& mv relation-graph-$RGVERSION /tools/relation-graph \
+&& chmod +x /tools/relation-graph 
+
 ###### SPARQLProg ######
 # See https://github.com/cmungall/sparqlprog/blob/master/INSTALL.md
 RUN swipl -g "Opts=[interactive(false)],pack_install(dcgutils,Opts),pack_install(obo_metadata,Opts),pack_install(index_util,Opts),pack_install(regex,Opts),pack_install(typedef,Opts),halt"
